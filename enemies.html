@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin:0;
+			padding:0;
+		}
+	</style>
+</head>
+<body>
+	<canvas id = "canvas" width = '600' height = '600'></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		var x = 0;
+		var y = 0;
+var th;
+var tw;
+var h;
+var w;
+var count = 1;
+var count2 = 0;
+
+var enemySprites = 
+{	
+	bottomleft: [],
+	left: [],
+	topleft: [],
+	top: [],
+	topright: [],
+	right: [],
+	bottomright: [],
+	bottom: []
+	
+}
+		for (el in enemySprites) {
+			for (var i = 0; i < 36; i++) {
+				var imgVar = new Image();
+				if (count * 36 - 36 + i >= 100) {imgVar.src =  'enemy/tile' + count2 + '.png';}
+				else if (count * 36 - 36 + i >= 10) {imgVar.src =  'enemy/tile0' + count2 +'.png';}
+				else if ((count * 36 - 36) + i >= 0) {imgVar.src =  'enemy/tile00' + count2  +'.png';}
+				//else {imgVar.src ='enemy/tile000.png';console.log(el)}
+								//console.log(i)
+								enemySprites[el].push(imgVar);
+								count2++;
+
+			}
+		
+				
+		
+			count += 1;
+		}
+
+		
+		
+
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<style>
+		* {
+			margin:0;
+			padding:0;
+		}
+	</style>
+</head>
+	<body>
+		<canvas id = 'canvas' width = '1450' height = '800' ></canvas>
+		
+		<p id="demo"></p>
+		<script>
+
+			var demo = document.getElementById('demo');
+
+			
+
+			var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+
+			var ch = canvas.height;
+			var cw = canvas.width;
+
+			var startingX = canvas.width / 2;
+			var startingY = canvas.height / 2;
+			var x2;
+			var y2;
+			var angle;
+			// 
+			// for (var i = 0; i < canvas.height; i+=20) {
+			// 	for (var j = 0; j < canvas.width;j+=20) {
+			// 		ctx.fillRect(j, i, 1, 1)
+				
+
+			// 	}
+				
+				
+			// }
+			var xs;
+			var ys;
+			canvas.addEventListener('mousemove', function(e) {
+
+				var vectorX = e.clientX - (soldier.x);
+				var vectorY = e.clientY - (soldier.y + 164);
+				var mod = Math.sqrt(vectorX ** 2 + vectorY ** 2);
+				angle = Math.atan2(vectorY, vectorX);
+				// var ux = vectorX / mod;
+				// var uy = vectorY / mod;
+				// var x2 = 235
+				// var y2 = 165
+				xs = e.clientX
+				ys = e.clientY
+				
+
+				demo.innerHTML = 'angle ' + angle + '</br>'+
+								 'degrees ' + angle * (180 / Math.PI) + '</br>'+
+								
+								 'screenx ' + e.clientX + '</br>'+
+								 'screeny ' + e.clientY + '</br>';
+								 
+
+			});
+			canvas.addEventListener('mousedown', function(e) {
+
+			})
+			// document.addEventListener('keydown', function(e) {
+
+			// 	switch(e.key) {
+
+			// 		case 'ArrowDown': //soldier.move(0, 1);
+			// 			break;
+			// 		case 'ArrowUp': ; //soldier.move(0, -1);
+			// 			break;
+			// 		case 'ArrowLeft': //soldier.move(-1, 0);
+			// 			break;
+			// 		case 'ArrowRight': soldier.x += 5; console.log('ri'); console.log(soldier.x)//soldier.move(1, 0);
+			// 			break;
+			// 	}
+			// });
+{
+			var audio = {
+
+					fx:
+					{
+							argh:
+							{
+								src: 
+								[
+									 'aargh/aargh0.ogg',
+									 'aargh/aargh1.ogg',
+									 'aargh/aargh2.ogg',
+									 'aargh/aargh3.ogg',
+									 'aargh/aargh4.ogg',
+									 'aargh/aargh5.ogg',
+									 'aargh/aargh6.ogg',
+									 'aargh/aargh7.ogg'
+								],
+								audio: []
+							},
+							vsgame0:
+							{
+								src:
+								[
+									 'vsgame_0/round_end.wav',
+									 'vsgame_0/death.wav'
+								],
+									audio: []
+							},
+							goblin:
+							{
+									src:
+									['GoblinDeath.wav'],
+									audio: []
+							},
+							up:
+							{
+									src:
+									['up/upshort.wav'],
+									audio: []
+							},
+							guns:
+							{
+								src:
+								[	'shots/cg1.wav',
+									'shots/pistol.wav',
+									'shots/rifle.wav',
+									'shots/shotgun.wav'
+								],
+									audio: []
+							},
+							zombie:
+							{
+								src:
+								[
+									'zombie/zombie-16.wav',
+									'zombie/zombie-22.wav',
+									'zombie/zombie-19.wav',
+									'zombie/zombie-17.wav',
+									'zombie/zombie-13.wav'
+								],
+								audio: []
+							}
+					},
+					ost: 
+					{
+							ost:
+							{
+							src:
+		                           [
+									  'vaerionii.mp3',
+									  'BlitzKaskade.mp3',
+									  'DST-RailJet[qubodupshort-cutloop].ogg',
+									  'forest.ogg',
+									  'JRPGOST/01-Opening.ogg',
+									  'JRPGOST/02-BWV1007-Prelude.ogg',
+									  'JRPGOST/03-HWV56-Whydothenationssofuriouslyragetogether.ogg',
+									  'JRPGOST/04-Sanctuary.ogg',
+									  'JRPGOST/05-Reunion.ogg',
+									  'JRPGOST/06-RebelsBe.ogg',
+									  'JRPGOST/07-Town.ogg',
+									  'JRPGOST/08-Overworld.ogg',
+									  'JRPGOST/09-Z339-HeretheDeitiesapprove.ogg',
+									  'JRPGOST/10-The Empire.ogg',
+									  'JRPGOST/11-Ostrich!.ogg',
+									  'JRPGOST/12-TimewornPagoda.ogg',
+									  'JRPGOST/13-Danger.ogg',
+									  'JRPGOST/14-BarbarianKing.ogg',
+									  'JRPGOST/15-Dungeon.ogg',
+									  'JRPGOST/16-EntertheEmperor.ogg',
+									  'JRPGOST/17-Victory.ogg',
+									  'JRPGOST/18-NighttideWaltz.ogg',
+									  'JRPGOST/19-Courtesan.ogg',
+									  'JRPGOST/20-GameOver.ogg',
+									  'JRPGOST/21-Fanfare.ogg',
+									  'JRPGOST/22-ANewComrade.ogg',
+									  'JRPGOST/23-Inn.ogg',
+									  'JRPGOST/24-RV610-Fecitpotentiam.ogg',
+									  'JRPGOST/25-Finale.ogg'
+								   ],
+							audio : []
+						}
+					}	
+			}
+			for (el in audio) {
+				
+				for (el2 in audio[el]) {
+
+					for (var i = 0; i < audio[el][el2]['src'].length; i++) {
+
+						var audioVar = new Audio();
+						audioVar.src = audio[el][el2]['src'][i];
+						audio[el][el2]['audio'].push(audioVar);
+					}
+				}
+			}
+
+			var sprites = 
+			{
+					flashlight:
+					{		
+							meleeAttack: 
+							{
+								number: 15,
+								src: 'Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_',
+								sprite:[]
+							},
+							idle:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_',
+								sprite:[]
+							},
+							move:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/flashlight/move/survivor-move_flashlight_',
+								sprite:[]
+							}
+					},
+					knife: 
+					{
+							meleeAttack: 
+							{
+								number: 15,
+								src: 'Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_',
+								sprite:[]
+							},
+							idle:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/knife/idle/survivor-idle_knife_',
+								sprite:[]
+							},
+							move:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/knife/move/survivor-move_knife_',
+								sprite:[]
+							}					
+					},
+					shotgun:
+					{
+							meleeAttack: 
+							{
+								number: 15,
+								src: 'Top_Down_Survivor/shotgun/meleeattack/survivor-meleeattack_shotgun_',
+								sprite:[]
+							},
+							idle:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/shotgun/idle/survivor-idle_shotgun_',
+								sprite:[]
+							},
+							move:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/shotgun/move/survivor-move_shotgun_',
+								sprite:[]
+							},
+							shoot:
+							{
+								number: 3,
+								src: 'Top_Down_Survivor/shotgun/shoot/survivor-shoot_shotgun_',
+								sprite:[]
+							},
+							reload:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/shotgun/reload/survivor-reload_shotgun_',
+								sprite:[]
+							}
+					},
+					rifle:
+					{
+							meleeAttack: 
+							{
+								number: 15,
+								src: 'Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_',
+								sprite:[]
+							},
+							idle:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/rifle/idle/survivor-idle_rifle_',
+								sprite:[]
+							},
+							move:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/rifle/move/survivor-move_rifle_',
+								sprite:[]
+							},
+							shoot: 
+							{
+								number: 3,
+								src: 'Top_Down_Survivor/rifle/shoot/survivor-shoot_rifle_',
+								sprite:[]
+							},
+							reload:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/rifle/reload/survivor-reload_rifle_',
+								sprite:[]
+							}
+					},
+					handgun:
+					{
+							meleeAttack: 
+							{
+								number: 15,
+								src: 'Top_Down_Survivor/handgun/meleeattack/survivor-meleeattack_handgun_',
+								sprite:[]
+							},
+							idle:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/handgun/idle/survivor-idle_handgun_',
+								sprite:[]
+							},
+							move:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/handgun/move/survivor-move_handgun_',
+								sprite:[]
+							},
+							shoot:
+							{
+								number: 3,
+								src: 'Top_Down_Survivor/handgun/shoot/survivor-shoot_handgun_',
+								sprite:[]
+							},
+							reload:
+							{
+								number: 15,
+								src: 'Top_Down_Survivor/handgun/reload/survivor-reload_handgun_',
+								sprite:[]
+							}
+					},
+					feet:
+					{
+							walk:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/feet/walk/survivor-walk_',
+								sprite:[]
+							},
+							left:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_',
+								sprite:[]
+							},
+							right:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_',
+								sprite:[]
+							},
+							run:
+							{
+								number: 20,
+								src: 'Top_Down_Survivor/feet/run/survivor-run_',
+								sprite:[]
+							},
+							idle:
+							{
+								number: 1,
+								src: 'Top_Down_Survivor/feet/idle/survivor-idle_',
+								sprite:[]
+							}
+					}
+			}
+{		
+			var light = new Image();
+			light.src = 'image(4).png';
+			var bulletFrame = new Image();
+			bulletFrame.src = '1_HeroShotgunBulletFrames.gif';
+			var enemySprite = new Image();
+			enemySprite.src = 'zombie_topdown.png';
+			var beam = new Image();
+			beam.src = 'beams.png';
+				
+			for (what in sprites) {
+
+				for (typ in sprites[what]) {
+
+					for (var i = 0; i < sprites[what][typ]['number']; i++) {
+
+						var imgVar = new Image();
+						imgVar.src = sprites[what][typ]['src'] + i + '.png';
+
+						sprites[what][typ]['sprite'].push(imgVar);	
+					}
+				}
+			}
+}
+}		
+			var h = sprites.handgun.idle.sprite[0].height / 2;			
+			var w = sprites.handgun.idle.sprite[0].width / 2;
+
+			var Shooter = function() {
+
+				this.x = startingX;
+				this.y = startingY;
+				var speed = 5;
+
+				// this.move = function(x, y) {
+
+				// 	x == 1 ? this.x += speed : x == -1 ? this.x -= speed : y == -1 ? this.y -= speed : y == 1 ? speed += speed : 0
+				// }
+
+				this.draw = function() {
+					
+					draw(sprites.handgun.idle.sprite[0], this.x, this.y);
+					// ctx.drawImage(light, 90, -70)
+				}
+
+				this.angle = function() {
+					
+				}
+			}
+			var soldier = new Shooter();
+			// var enemy = function() {
+
+			// }
+			function loop() {
+
+				clear();
+				
+					ctx.save();
+
+					ctx.translate(soldier.x + w, soldier.y + h);
+					ctx.rotate(angle);
+					ctx.translate(-soldier.x-w, -soldier.y-h)
+										ctx.fillRect(soldier.x + 237, soldier.y + 164, 20, 20)
+										soldier.draw();
+										ctx.beginPath()
+										ctx.moveTo(soldier.x +237,soldier.y +164)
+
+
+										ctx.translate(soldier.x + w, soldier.y + h);
+										
+
+										ctx.rotate(-angle);
+										ctx.translate(-soldier.x-w, -soldier.y-h)
+										ctx.fillRect(xs, ys, 20, 20)
+										
+										
+										ctx.lineTo(xs, ys);
+										ctx.stroke()
+										
+
+
+					
+					ctx.restore();
+
+			}
+			function draw(img, x, y) {
+
+				ctx.drawImage(img, x, y);
+			}
+			function clear() {
+
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+			}
+			window.onload = function() {
+				setInterval(function() {
+					loop();}, 250);
+			}
+			var dibuja = function(x = 300, y=300) {
+				ctx.drawImage(sprites.handgun.idle.sprite[0], x, y);
+			}
+			var rota = function(grados = 25) {
+				ctx.rotate(grados *180/Math.PI)
+			}
+			var trans = function(x = 300, y=300) {
+				ctx.translate(x, y)
+			}
+			var punto = function(x, y) {
+				ctx.fillRect(x, y, 5, 5)
+			}
+			var linea = function(x0=0,y0=0,x1=cw,y1=ch) {
+				ctx.beginPath()
+				ctx.moveTo(x0,y0)
+				ctx.lineTo(x1,y1)
+				ctx.stroke()
+			}
+		</script>
+	</body>
+
+</html>
